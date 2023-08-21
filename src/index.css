@@ -31,3 +31,7 @@ main {
 .btn-nav.active {
   @apply bg-gray-700;
 }
+
+.btn-danger {
+  @apply bg-red-600 text-white hover:bg-red-700;
+}

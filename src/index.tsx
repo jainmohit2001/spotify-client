@@ -14,7 +14,9 @@ function Layout() {
   return (
     <>
       <Header />
-      <Outlet />
+      <main>
+        <Outlet />
+      </main>
     </>
   )
 }
@@ -44,6 +46,7 @@ const router = createBrowserRouter([
         element: <ErrorPage />,
       },
     ],
+    errorElement: <ErrorPage />,
   },
 ])
 

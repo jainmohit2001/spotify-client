@@ -1,31 +1,29 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
 import Loading from '../components/Loading'
-import { getProfile } from '../api/Spotify'
-import IProfile from '../interfaces/Profile.interface'
-import { Navigate } from 'react-router-dom'
+import { Navigate, useNavigate } from 'react-router-dom'
+import useProfile from '../hooks/profile.hook'
 
 function Profile() {
-  const [loading, setLoading] = useState(true)
-  const [profile, setProfile] = useState({} as IProfile)
+  const { profile, status } = useProfile()
+  const navigate = useNavigate()
+
+  const signOut = () => {
+    localStorage.removeItem('access_token')
+    localStorage.removeItem('refresh_token')
+
+    return navigate('/')
+  }
 
   useEffect(() => {
-    document.title = 'Profile | Spotify Client'
+    if (status === 'authenticated') {
+      document.title = `${profile.display_name} - Spotify Client`
+    }
+  }, [profile])
 
-    getProfile(localStorage.getItem('access_token') ?? '')
-      .then((data: IProfile) => {
-        setProfile(data)
-        document.title = `${data.display_name} | Spotify Client`
-      })
-      .catch((error) => {
-        console.error(error)
-      })
-      .finally(() => {
-        setLoading(false)
-      })
-  }, [])
-
-  if (loading) {
+  if (status === 'loading') {
     return <Loading />
+  } else if (status === 'unauthenticated') {
+    return <Navigate to={'/login'} />
   }
 
   if (!profile.id) {
@@ -33,9 +31,25 @@ function Profile() {
   }
 
   return (
-    <div>
-      <p>Profile</p>
-      <p>{profile.display_name}</p>
+    <div className='flex flex-col'>
+      <div className='ml-auto flex gap-2'>
+        <button className='btn btn-nav btn-danger' onClick={signOut}>
+          Sign Out
+        </button>
+      </div>
+      <div className='flex flex-row'>
+        <div className='flex flex-shrink flex-col items-center justify-center gap-2'>
+          {profile.images.length > 0 && (
+            <img
+              src={profile.images[0].url}
+              height={profile.images[0].height}
+              width={profile.images[0].width}
+              className='rounded-full'
+            />
+          )}
+          <p className='text-lg font-medium'>{profile.display_name}</p>
+        </div>
+      </div>
     </div>
   )
 }
