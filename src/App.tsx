@@ -1,24 +1,16 @@
 import React from 'react'
-import logo from './logo.svg'
-import './App.css'
+import { Link } from 'react-router-dom'
 
 function App() {
   return (
-    <div className='App'>
-      <header className='App-header'>
-        <img src={logo} className='App-logo' alt='logo' />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className='App-link'
-          href='https://reactjs.org'
-          target='_blank'
-          rel='noopener noreferrer'
-        >
-          Learn React
-        </a>
-      </header>
+    <div className='flex flex-1 flex-col items-center justify-center gap-4'>
+      <div className='flex items-center justify-center'>
+        <img src={'./spotify-logo.svg'} width={64} height={64}></img>
+      </div>
+      <p className='text-3xl font-bold'>Spotify Client</p>
+      <Link className='btn btn-green' to={'/login'}>
+        Login
+      </Link>
     </div>
   )
 }
