@@ -9,9 +9,12 @@ function Profile() {
   const [profile, setProfile] = useState({} as IProfile)
 
   useEffect(() => {
+    document.title = 'Profile | Spotify Client'
+
     getProfile(localStorage.getItem('access_token') ?? '')
       .then((data: IProfile) => {
         setProfile(data)
+        document.title = `${data.display_name} | Spotify Client`
       })
       .catch((error) => {
         console.error(error)

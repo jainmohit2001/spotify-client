@@ -10,6 +10,8 @@ function Login() {
   const redirectUri = process.env.REACT_APP_SPOTIFY_REDIRECT_URI ?? ''
 
   useEffect(() => {
+    document.title = 'Login | Spotify Client'
+
     generateCodeChallenge(codeVerifier).then((codeChallenge) => {
       const state = generateRandomString(16)
       const scope = 'user-read-private user-read-email'

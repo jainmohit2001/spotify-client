@@ -3,32 +3,47 @@ import ReactDOM from 'react-dom/client'
 import './index.css'
 import App from './App'
 import reportWebVitals from './reportWebVitals'
-import { createBrowserRouter, RouterProvider } from 'react-router-dom'
+import { createBrowserRouter, Outlet, RouterProvider } from 'react-router-dom'
 import Login from './pages/Login'
 import CallBack from './pages/Callback'
 import Profile from './pages/Profile'
 import ErrorPage from './pages/Error'
+import Header from './components/Header'
+
+function Layout() {
+  return (
+    <>
+      <Header />
+      <Outlet />
+    </>
+  )
+}
 
 const router = createBrowserRouter([
   {
-    path: '/',
-    element: <App />,
-  },
-  {
-    path: '/login',
-    element: <Login />,
-  },
-  {
-    path: '/callback',
-    element: <CallBack />,
-  },
-  {
-    path: '/profile',
-    element: <Profile />,
-  },
-  {
-    path: '/error',
-    element: <ErrorPage />,
+    element: <Layout />,
+    children: [
+      {
+        path: '/',
+        element: <App />,
+      },
+      {
+        path: '/login',
+        element: <Login />,
+      },
+      {
+        path: '/callback',
+        element: <CallBack />,
+      },
+      {
+        path: '/profile',
+        element: <Profile />,
+      },
+      {
+        path: '/error',
+        element: <ErrorPage />,
+      },
+    ],
   },
 ])
 

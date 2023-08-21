@@ -7,12 +7,13 @@ body,
   @apply flex h-full min-h-screen w-full flex-1 flex-col bg-gray-900 text-white;
 }
 
-#root {
+main {
   @apply p-2 sm:p-3;
 }
 
 .btn {
   @apply flex max-w-fit gap-2 rounded px-4 py-2 font-medium;
+  @apply transition duration-150 ease-in-out;
 }
 
 .btn-blue {
@@ -21,4 +22,12 @@ body,
 
 .btn-green {
   @apply bg-green-600 text-white hover:bg-green-700;
+}
+
+.btn-nav {
+  @apply border border-gray-700 px-3 text-sm hover:bg-gray-700;
+}
+
+.btn-nav.active {
+  @apply bg-gray-700;
 }
