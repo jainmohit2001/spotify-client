@@ -4,11 +4,9 @@ import './index.css'
 import App from './App'
 import reportWebVitals from './reportWebVitals'
 import { createBrowserRouter, Outlet, RouterProvider } from 'react-router-dom'
-import Login from './pages/Login'
-import CallBack from './pages/Callback'
-import Profile from './pages/Profile'
 import ErrorPage from './pages/Error'
 import Header from './components/Header'
+import Playlists from './pages/Playlists'
 
 function Layout() {
   return (
@@ -30,20 +28,12 @@ const router = createBrowserRouter([
         element: <App />,
       },
       {
-        path: '/login',
-        element: <Login />,
-      },
-      {
-        path: '/callback',
-        element: <CallBack />,
-      },
-      {
-        path: '/profile',
-        element: <Profile />,
-      },
-      {
         path: '/error',
         element: <ErrorPage />,
+      },
+      {
+        path: '/playlists',
+        element: <Playlists />,
       },
     ],
     errorElement: <ErrorPage />,

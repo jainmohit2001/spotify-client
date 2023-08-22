@@ -6,15 +6,18 @@ function Header() {
 
   useEffect(() => {
     const url: string = location?.pathname ?? ''
-    const headerHome = document.getElementById('id-header-home')
-    const headerProfile = document.getElementById('id-header-profile')
 
-    if (url && url.includes('/profile')) {
-      headerHome?.classList.remove('active')
-      headerProfile?.classList.add('active')
+    const navBtn = document.querySelectorAll('nav .btn-nav')
+
+    const headerPlaylist = document.getElementById('id-header-playlist')
+    const headerHome = document.getElementById('id-header-home')
+
+    navBtn.forEach((btn) => btn.classList.remove('active'))
+
+    if (url && url.includes('/playlist')) {
+      headerPlaylist?.classList.add('active')
     } else {
       headerHome?.classList.add('active')
-      headerProfile?.classList.remove('active')
     }
   }, [location])
 
@@ -32,10 +35,13 @@ function Header() {
           <Link className='btn btn-nav' to={'/'} id='id-header-home'>
             Home
           </Link>
-        </div>
-        <div className='ml-4 flex gap-2'>
-          <Link className='btn btn-nav' to={'/profile'} id='id-header-profile'>
-            Profile
+
+          <Link
+            className='btn btn-nav'
+            to={'/playlists'}
+            id='id-header-playlist'
+          >
+            Playlists
           </Link>
         </div>
       </div>
