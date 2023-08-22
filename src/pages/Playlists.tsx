@@ -8,9 +8,9 @@ function Playlists() {
   const sdk = useSpotify(Scopes.playlistRead)
   const [playlists, setPlaylists] = useState([] as SimplifiedPlaylist[])
   const [loading, setLoading] = useState(true)
-  document.title = 'Playlists'
 
   useEffect(() => {
+    document.title = 'Playlists'
     sdk?.currentUser.playlists
       .playlists()
       .then((data) => {

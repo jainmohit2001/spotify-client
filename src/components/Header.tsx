@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react'
 import { Link, useLocation } from 'react-router-dom'
+import logo from '../spotify-logo.svg'
 
 function Header() {
   const location = useLocation()
@@ -27,7 +28,7 @@ function Header() {
         className='mr-6 flex flex-shrink-0 items-center justify-center gap-2'
         to={'/'}
       >
-        <img src={'./spotify-logo.svg'} width={20} height={20} loading='lazy' />
+        <img src={logo} width={20} height={20} />
         <p className='text-sm font-medium'>Spotify Client</p>
       </Link>
       <div className='flex flex-grow justify-between'>
