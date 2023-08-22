@@ -27,7 +27,7 @@ function Header() {
         className='mr-6 flex flex-shrink-0 items-center justify-center gap-2'
         to={'/'}
       >
-        <img src={'./spotify-logo.svg'} width={20} height={20} />
+        <img src={'./spotify-logo.svg'} width={20} height={20} loading='lazy' />
         <p className='text-sm font-medium'>Spotify Client</p>
       </Link>
       <div className='flex flex-grow justify-between'>

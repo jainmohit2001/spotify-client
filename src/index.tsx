@@ -7,6 +7,7 @@ import { createBrowserRouter, Outlet, RouterProvider } from 'react-router-dom'
 import ErrorPage from './pages/Error'
 import Header from './components/Header'
 import Playlists from './pages/Playlists'
+import PlaylistDetails from './pages/PlaylistDetails'
 
 function Layout() {
   return (
@@ -34,6 +35,10 @@ const router = createBrowserRouter([
       {
         path: '/playlists',
         element: <Playlists />,
+      },
+      {
+        path: '/playlist/:playlistId',
+        element: <PlaylistDetails />,
       },
     ],
     errorElement: <ErrorPage />,
