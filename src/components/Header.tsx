@@ -1,9 +1,16 @@
 import React, { useEffect } from 'react'
 import { Link, useLocation } from 'react-router-dom'
 import logo from '../spotify-logo.svg'
+import { useSpotify } from '../hooks/useSpotify'
 
 function Header() {
   const location = useLocation()
+  const sdk = useSpotify()
+
+  const handleSignOut = () => {
+    sdk?.logOut()
+    window.location.assign('/')
+  }
 
   useEffect(() => {
     const url: string = location?.pathname ?? ''
@@ -44,6 +51,13 @@ function Header() {
           >
             Playlists
           </Link>
+        </div>
+        <div className='flex gap-2'>
+          {sdk && (
+            <button className='btn btn-nav btn-danger' onClick={handleSignOut}>
+              Log out
+            </button>
+          )}
         </div>
       </div>
     </nav>

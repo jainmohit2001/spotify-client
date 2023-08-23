@@ -1,11 +1,12 @@
 import React, { useEffect, useRef, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import { useSpotify } from '../hooks/useSpotify'
-import { Playlist, PlaylistedTrack, Scopes } from '@spotify/web-api-ts-sdk'
+import { Playlist, PlaylistedTrack } from '@spotify/web-api-ts-sdk'
 import Loading from '../components/Loading'
+import { PlayArrow } from '@mui/icons-material'
 
 function PlaylistDetails() {
-  const sdk = useSpotify(Scopes.playlistRead)
+  const sdk = useSpotify()
   const { playlistId } = useParams()
   const [playlist, setPlaylist] = useState({} as Playlist)
   const [loading, setLoading] = useState(true)
@@ -21,10 +22,18 @@ function PlaylistDetails() {
     }
   }, [page])
 
+  const playCurrentPlaylist = async () => {
+    if (sdk && playlist) {
+      const state = await sdk.player.getPlaybackState()
+      if (state.device.id) {
+        sdk.player.startResumePlayback(state.device.id, playlist.uri)
+      }
+    }
+  }
+
   async function fetchTracks() {
     if (sdk && playlistId && !fetchingMoreTracks) {
       setFetchingMoreTracks(true)
-      console.log(pageOffset)
       const data = await sdk.playlists.getPlaylistItems(
         playlistId,
         undefined,
@@ -102,6 +111,15 @@ function PlaylistDetails() {
             {playlist.tracks.total} songs
           </p>
         </div>
+        <div className='mt-auto'>
+          <button
+            className='btn btn-green !rounded-full !p-2'
+            title='Play'
+            onClick={playCurrentPlaylist}
+          >
+            <PlayArrow sx={{ color: 'white' }} fontSize='large' />
+          </button>
+        </div>
       </div>
       <div className='flex w-full border border-gray-100'></div>
       <div className='mt-4 flex flex-col gap-2'>
@@ -144,8 +162,8 @@ function TrackRow(track: PlaylistedTrack, index: number) {
     const artists = track.track.artists
 
     return (
-      <tr>
-        <td className='py-2 align-middle'>
+      <tr key={index}>
+        <td className='p-2 align-middle'>
           <p className='text-xs font-medium'>{index + 1}</p>
         </td>
         <td className='py-2 pr-2 align-middle'>

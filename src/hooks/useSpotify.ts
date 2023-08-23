@@ -1,11 +1,20 @@
 import { useEffect, useRef, useState } from 'react'
 import {
   AuthorizationCodeWithPKCEStrategy,
+  Scopes,
   SdkOptions,
   SpotifyApi,
 } from '@spotify/web-api-ts-sdk'
 
-export function useSpotify(scopes: string[], config?: SdkOptions) {
+export function useSpotify(config?: SdkOptions) {
+  const scopes: string[] = [
+    ...Scopes.userDetails,
+    ...Scopes.playlistRead,
+    ...Scopes.userPlaybackRead,
+    ...Scopes.userPlayback,
+    ...Scopes.userPlaybackModify,
+  ]
+
   const clientId = process.env.REACT_APP_SPOTIFY_CLIENT_ID ?? ''
   const redirectUrl = process.env.REACT_APP_SPOTIFY_REDIRECT_URI ?? ''
 

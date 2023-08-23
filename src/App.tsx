@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react'
 import { useSpotify } from './hooks/useSpotify'
-import { Scopes, User } from '@spotify/web-api-ts-sdk'
+import { User } from '@spotify/web-api-ts-sdk'
 
 function App() {
-  const sdk = useSpotify(Scopes.userDetails)
+  const sdk = useSpotify()
   const [user, setUser] = useState({} as User)
 
   useEffect(() => {

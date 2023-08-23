@@ -8,6 +8,7 @@ import ErrorPage from './pages/Error'
 import Header from './components/Header'
 import Playlists from './pages/Playlists'
 import PlaylistDetails from './pages/PlaylistDetails'
+import WebPlayback from './components/WebPlayback'
 
 function Layout() {
   return (
@@ -16,6 +17,7 @@ function Layout() {
       <main>
         <Outlet />
       </main>
+      <WebPlayback />
     </>
   )
 }

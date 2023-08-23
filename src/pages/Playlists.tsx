@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react'
 import { useSpotify } from '../hooks/useSpotify'
-import { Scopes, SimplifiedPlaylist } from '@spotify/web-api-ts-sdk'
+import { SimplifiedPlaylist } from '@spotify/web-api-ts-sdk'
 import Loading from '../components/Loading'
 import { Link } from 'react-router-dom'
 
 function Playlists() {
-  const sdk = useSpotify(Scopes.playlistRead)
+  const sdk = useSpotify()
   const [playlists, setPlaylists] = useState([] as SimplifiedPlaylist[])
   const [loading, setLoading] = useState(true)
 
